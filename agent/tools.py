@@ -10,7 +10,7 @@ and keeps a record of everything that happened for the eval.
 from __future__ import annotations
 
 import json
-from typing import Literal, Optional
+from typing import Literal
 from urllib.parse import quote
 
 import requests
@@ -68,10 +68,10 @@ TOOL_SCHEMAS = [
 class SubmitResult(BaseModel):
     """The final answer. Pydantic checks the types and cleans up the values."""
     category: Literal["refund_request", "shipping_delay", "billing_question", "invoice_received", "spam"]
-    order_id: Optional[str] = None
-    invoice_number: Optional[str] = None
-    po_number: Optional[str] = None
-    amount: Optional[float] = None
+    order_id: str | None = None
+    invoice_number: str | None = None
+    po_number: str | None = None
+    amount: float | None = None
 
     @field_validator("category", mode="before")
     @classmethod

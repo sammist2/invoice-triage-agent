@@ -29,12 +29,18 @@ import argparse
 import os
 import sqlite3
 from contextlib import contextmanager
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from flask import Flask, jsonify, request
 
-from shared.normalize import amounts_equal, normalize_invoice_number, normalize_order_id, normalize_po_number, parse_amount
+from shared.normalize import (
+    amounts_equal,
+    normalize_invoice_number,
+    normalize_order_id,
+    normalize_po_number,
+    parse_amount,
+)
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_DB = PROJECT_DIR / "data" / "business.db"
@@ -66,7 +72,7 @@ LIST_TABLES = {"tickets": "tickets", "invoices": "recorded_invoices", "flags": "
 
 
 def now() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 def error(code: int, message: str, **extra):

@@ -1,6 +1,12 @@
 import unittest
 
-from shared.normalize import amounts_equal, normalize_invoice_number, normalize_order_id, normalize_po_number, parse_amount
+from shared.normalize import (
+    amounts_equal,
+    normalize_invoice_number,
+    normalize_order_id,
+    normalize_po_number,
+    parse_amount,
+)
 
 
 class NormalizeTests(unittest.TestCase):
