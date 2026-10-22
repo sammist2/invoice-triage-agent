@@ -1,0 +1,9 @@
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+# Pyflakes (F) catches real errors; isort (I) keeps imports tidy; pyupgrade
+# (UP) modernises syntax; E9 catches syntax errors. Kept deliberately focused
+# so the gate stays signal, not style noise.
+select = ["E9", "F", "I", "UP"]

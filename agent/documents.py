@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from functools import lru_cache
+from functools import cache
 from pathlib import Path
 
 import pdfplumber
@@ -18,7 +18,7 @@ def load_jsonl(path: str | Path) -> list[dict]:
         return [json.loads(line) for line in f if line.strip()]
 
 
-@lru_cache(maxsize=None)
+@cache
 def extract_pdf_text(path: str) -> str:
     """Pull the text out of every page of a PDF."""
     with pdfplumber.open(path) as pdf:
