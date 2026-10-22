@@ -10,6 +10,9 @@ class NormalizeTests(unittest.TestCase):
         for empty in [None, "", "null", "None", "N/A"]:
             self.assertIsNone(normalize_order_id(empty))
         self.assertEqual(normalize_order_id("abc"), "ABC")
+        # Order numbers longer than five digits must be kept whole, not truncated.
+        for raw in ["123456", "order #123456", "ORD-123456"]:
+            self.assertEqual(normalize_order_id(raw), "ORD-123456", raw)
 
     def test_po_numbers(self):
         for raw in ["PO-5013", "po 5013", "P.O. 5013", "5013", "PO#5013"]:
