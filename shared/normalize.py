@@ -17,7 +17,7 @@ def normalize_order_id(value) -> str | None:
     text = str(value).strip()
     if not text or text.lower() in ("null", "none", "n/a"):
         return None
-    match = re.search(r"\d{5}", text)
+    match = re.search(r"\d{5,}", text)
     return f"ORD-{match.group(0)}" if match else text.upper()
 
 
