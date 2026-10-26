@@ -1,5 +1,7 @@
 # AI Inbox & Invoice Triage Agent
 
+[![tests](https://github.com/sammist2/invoice-triage-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/sammist2/invoice-triage-agent/actions/workflows/ci.yml)
+
 An AI agent that does the repetitive inbox work at a small online store: it reads customer emails and supplier invoice PDFs, decides what each one is, checks the business database, and takes the right action through a REST API, such as opening a support ticket, recording an invoice for payment, flagging a problem for a human, or marking spam.
 
 It runs on **local models** (Ollama, vLLM) or **hosted LLM APIs** (Gemini, Groq) with one setting, and comes with an **evaluation harness** that scores every run on accuracy, speed and cost against a labeled answer key.
@@ -146,7 +148,10 @@ tests/                  49 tests, including an end-to-end run with a fake "perfe
 ## Tests
 
 ```bash
-python -m unittest
+python -m unittest           # run the suite
+ruff check .                 # lint
 ```
+
+CI (GitHub Actions) runs the suite on Python 3.11–3.13, plus `ruff`, on every push and pull request.
 
 The tests don't need a real model or internet. They cover the API, the agent loop (with a fake model server, including bad tool arguments, rate limits and server errors), the eval, and the data itself: every label is re-checked against the database and the PDF text. One end-to-end test runs the real runner, API and eval with a fake model that always makes the right calls, and requires a score of exactly 100%.
